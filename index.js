@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
     max = Math.floor(max);
     let num = Math.floor(Math.random() * (max - min) + min);
     if ((num > (wHalf-r) && num <= (wHalf+r)) || (num > (hHalf-r) && num <= (hHalf+r))) {
-      num+=(r+(Math.random()*5));
+      num+=(r+(Math.random()*2));
     }
     return num // The maximum is exclusive and the minimum is inclusive
   }
@@ -19,11 +19,18 @@ window.addEventListener("load", () => {
   const container = document.getElementById("container");
   const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+  function dragIt(e) {
+    e.target.style.left = `${e.clientX}px`;
+    e.target.style.top = `${e.clientY}px`;
+  }
+
   function display(ch) {
     const span = document.createElement("span");
     span.innerText = ch;
     span.style.left = `${getRandomIntNotCenter(wOffset,w)}px`;
     span.style.top = `${getRandomIntNotCenter(hOffset,h)}px`;
+    span.draggable = "true";
+    span.ondragend = dragIt;
     container.appendChild(span);
   }
 
