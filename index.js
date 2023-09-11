@@ -5,24 +5,20 @@ window.addEventListener("load", () => {
   const h = window.innerHeight - hOffset;
   const wHalf = (w/2)+wOffset;
   const hHalf = (h/2)+hOffset;
-  const rW = 50;
-  const rH = 50;
-  function getRandomIntNotCenter(min, max, isWidth = false) {
+  const r = 50;
+  function getRandomIntNotCenter(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     let num = Math.floor(Math.random() * (max - min) + min);
-    if (isWidth && (num > (wHalf-rW) && num <= (wHalf+rW))) {
-      console.log({isWidth, num});
-      num+=rW;
-    } else if (!isWidth && (num > (hHalf-rH) && num <= (hHalf+rH))) {
-      console.log({isWidth, num});
-      num+=rH;
+    if ((num > (wHalf-r) && num <= (wHalf+r)) || (num > (hHalf-r) && num <= (hHalf+r))) {
+      console.log({num});
+      num+=(r+(Math.random()*2));
     }
     return num // The maximum is exclusive and the minimum is inclusive
   }
   
   const container = document.getElementById("container");
-  const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "rH", "s", "t", "u", "v", "w", "x", "y", "z"];
+  const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
   function dragIt(e) {
     e.target.style.left = `${e.clientX}px`;
@@ -32,14 +28,14 @@ window.addEventListener("load", () => {
   function display(ch) {
     const span = document.createElement("span");
     span.innerText = ch;
-    span.style.left = `${getRandomIntNotCenter(wOffset,w,true)}px`;
+    span.style.left = `${getRandomIntNotCenter(wOffset,w)}px`;
     span.style.top = `${getRandomIntNotCenter(hOffset,h)}px`;
     span.draggable = "true";
     span.ondragend = dragIt;
     container.appendChild(span);
   }
 
-  fetch("radicals.json").then((rH) => rH.json()).then((d) => {
+  fetch("radicals.json").then((r) => r.json()).then((d) => {
     Array.from(d).forEach((radical) => display(radical));
     alphabet.forEach((letter) => display(letter));
   });
