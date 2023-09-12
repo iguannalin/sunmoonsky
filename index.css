@@ -32,7 +32,10 @@ body {
   width: 6ch;
   line-height: 18px;
   height: 3ch;
-  /* margin-top: 30vh; */
+}
+
+#maker div {
+  margin: 0 -2px;
 }
 
 .bit {

@@ -18,7 +18,8 @@ window.addEventListener("load", () => {
 
   function handleClick(e) {
     const div = document.createElement("div");
-    div.style.fontSize = `${getRandomInt(12,28)}px`;
+    div.style.fontSize = `${getRandomInt(12,24)}px`;
+    div.style.transform = `scale(${getRandomInt(5,15)/10},${getRandomInt(10,13)/10})`;
     div.innerHTML = e.target.innerText;
     e.target.parentElement.removeChild(e.target);
     maker.appendChild(div);
