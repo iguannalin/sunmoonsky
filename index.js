@@ -5,48 +5,33 @@ window.addEventListener("load", () => {
   const h = window.innerHeight - hOffset;
   const wHalf = (w/2);
   const hHalf = (h/2);
-  const r = 50;
-  function getRandomIntNotCenter(min, max) {
+  function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    let num = Math.floor(Math.random() * (max - min) + min);
-    // if ((num > (wHalf-r) && num <= (wHalf+r)) || (num > (hHalf-r) && num <= (hHalf+r))) {
-    //   num+=(r+(Math.random()*2));
-    // }
-    return num // The maximum is exclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (max - min) + min);
   }
   
   const container = document.getElementById("container");
+  const maker = document.getElementById("maker");
+  maker.style.marginTop = `${w/2}px`;
   const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
   function handleClick(e) {
-    e.target.addEventListener('mousemove', dragIt, true);
-    e.target.addEventListener('touchmove', dragIt, true);
+    const div = document.createElement("div");
+    div.style.fontSize = `${getRandomInt(12,28)}px`;
+    div.innerHTML = e.target.innerText;
+    e.target.parentElement.removeChild(e.target);
+    maker.appendChild(div);
   }
-
-  function dragIt(e) {
-    e.preventDefault();
-    e.target.style.left = `${e.clientX-10}px`;
-    e.target.style.top = `${e.clientY-10}px`;
-    e.target.addEventListener('mouseup', () => {
-      e.target.removeEventListener('mousemove', dragIt);
-    });
-    e.target.addEventListener('touchend', () => {
-      e.target.removeEventListener('touchmove', dragIt);
-    });
-  }
-
-  let isDown = false;
 
   function display(ch) {
     if (Math.random() > 0.5) return; // only show some
-    const span = document.createElement("span");
+    const span = document.createElement("button");
+    span.classList = "bit";
     span.innerText = ch;
-    span.style.left = `${getRandomIntNotCenter(wOffset,w)}px`;
-    span.style.top = `${getRandomIntNotCenter(hOffset,h)}px`;
-    // span.draggable = "true";
-    span.addEventListener('mousedown', handleClick);
-    span.addEventListener('touchstart', handleClick);
+    span.style.left = `${getRandomInt(wOffset,w)}px`;
+    span.style.top = `${getRandomInt(hHalf+(h/6),h)}px`;
+    span.onclick = handleClick;
     container.appendChild(span);
   }
 

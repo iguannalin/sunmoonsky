@@ -20,14 +20,22 @@ body {
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
   text-shadow: var(--shadow-color) -2px 2px 8px;
-}
-
-#container {
-  font-size: 26px;
-}
-
-span {
-  position: absolute;
   font-family: sans-serif, "helvetica";
+  text-transform: capitalize;
+}
+
+#maker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  width: 6ch;
+  line-height: 18px;
+  height: 3ch;
+  /* margin-top: 30vh; */
+}
+
+.bit {
+  position: absolute;
   cursor: pointer;
 }
